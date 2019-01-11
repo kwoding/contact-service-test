@@ -1,4 +1,4 @@
-package it.ding.contact.create;
+package it.ding.contact;
 
 import static it.ding.contact.data.TestData.ADMIN;
 import static it.ding.contact.data.TestData.ADMIN_PASSWORD;

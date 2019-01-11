@@ -1,9 +1,10 @@
-package it.ding.contact.update;
+package it.ding.contact;
 
 import static it.ding.contact.data.TestData.ADMIN;
 import static it.ding.contact.data.TestData.ADMIN_PASSWORD;
 import static it.ding.contact.util.ContactTestUtil.generateContactWithAllFieldsFilled;
 import static org.apache.http.HttpStatus.SC_CREATED;
+import static org.apache.http.HttpStatus.SC_NOT_FOUND;
 import static org.apache.http.HttpStatus.SC_NO_CONTENT;
 import static org.apache.http.HttpStatus.SC_OK;
 import static org.hamcrest.CoreMatchers.is;
@@ -15,15 +16,14 @@ import it.ding.contact.model.Contact;
 import it.ding.contact.model.ContactPostResponseBody;
 import org.junit.Test;
 
-public class UpdateContactTest {
+public class DeleteContactTest {
 
     private LoginRestClient loginRestClient = new LoginRestClient();
     private ContactRestClient contactRestClient = new ContactRestClient();
 
     @Test
-    public void canUpdateContact() {
+    public void canDeleteContact() {
         Contact contact = generateContactWithAllFieldsFilled();
-        Contact updatedContact = generateContactWithAllFieldsFilled();
 
         loginRestClient.login(ADMIN, ADMIN_PASSWORD);
 
@@ -33,18 +33,13 @@ public class UpdateContactTest {
             .extract()
             .as(ContactPostResponseBody.class);
 
-        contactRestClient.updateContact(contactPostResponseBody.getId(), updatedContact)
+        contactRestClient.deleteContact(contactPostResponseBody.getId())
             .then()
-            .statusCode(SC_NO_CONTENT);
+            .statusCode(SC_OK);
 
-        Contact actualContact = contactRestClient.retrieveSingleContact(contactPostResponseBody.getId())
+        contactRestClient.retrieveSingleContact(contactPostResponseBody.getId())
             .then()
-            .statusCode(SC_OK)
-            .extract()
-            .as(Contact.class);
-
-        updatedContact.setId(contactPostResponseBody.getId());
-        assertThat(actualContact, is(updatedContact));
+            .statusCode(SC_NOT_FOUND);
     }
 
 }
