@@ -1,5 +1,26 @@
 # Exercise 1: Create operation
 
+## Endpoints
+```
+[POST]   /login
+Authenticate
+
+[POST]   /api/contacts
+Create contact
+
+[GET]    /api/contacts
+Retrieve contact list
+
+[GET]    /api/contacts/{contactId}
+Retrieve single contact
+
+[PUT]    /api/contacts/{contactId}
+Update contact
+
+[DELETE] /api/contacts/{contactId}
+Delete contact
+```
+
 ## Model
 - This is an example of a request body to create a Contact.
 - The response body when retrieving a Contact is similar with the addition of an `id` field.
@@ -20,12 +41,12 @@
 ```
 
 ## Description exercise
-
-1. Create contacts by POSTing contacts using the already-created `ContactRestClient` in this project for:
+1. Login with `admin`/`password` using the already-created `LoginRestClient` in this project.
+2. Create contacts by POSTing contacts using the already-created `ContactRestClient` for:
 
 - Contact with mandatory fields filled
 - Contact with all fields filled
 - Contact with some missing mandatory fields
 - Contact with all fields filled but invalid e-mail address
 
-2. Assert the status response code for each test
+3. Assert the status response code for each test
