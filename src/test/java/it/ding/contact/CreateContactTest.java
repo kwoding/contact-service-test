@@ -7,7 +7,6 @@ import static it.ding.contact.util.ContactTestUtil.generateContactWithAllFieldsF
 import static org.apache.http.HttpStatus.SC_BAD_REQUEST;
 import static org.apache.http.HttpStatus.SC_CREATED;
 import static org.apache.http.HttpStatus.SC_OK;
-import static org.hamcrest.CoreMatchers.containsString;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -46,7 +45,7 @@ public class CreateContactTest {
     }
 
     @Test
-    public void canCreateContactByMap() {
+    public void canCreateContact() {
         Map<String, String> contact = generateContactMapWithAllFieldsFilled();
 
         loginRestClient.login(ADMIN, ADMIN_PASSWORD);
@@ -61,7 +60,7 @@ public class CreateContactTest {
     }
 
     @Test
-    public void canCreateContact() {
+    public void canCreateContactWithPojo() {
         Contact contact = generateContactWithAllFieldsFilled();
 
         loginRestClient.login(ADMIN, ADMIN_PASSWORD);
@@ -80,6 +79,31 @@ public class CreateContactTest {
 
         contact.setId(contactPostResponseBody.getId());
         assertThat(actualContact, is(contact));
+    }
+
+    @Test
+    public void cannotCreateContactWithMissingMandatoryFieldFirstName() {
+        Contact contact = generateContactWithAllFieldsFilled();
+
+        contact.setFirstName(null);
+
+        ErrorResponseBody errorResponseBody = contactRestClient.createContact(contact)
+            .then()
+            .statusCode(SC_BAD_REQUEST)
+            .extract()
+            .as(ErrorResponseBody.class);
+
+        assertThat(errorResponseBody.getFieldErrors(), notNullValue());
+        assertThat(errorResponseBody.getFieldErrors().containsKey("firstName"), is(true));
+
+        List<Contact> actualContacts = contactRestClient.retrieveContacts()
+            .then()
+            .statusCode(SC_OK)
+            .extract()
+            .as(ContactListGetResponseBody.class)
+            .getContent();
+
+        assertThat(actualContacts.size(), is(0));
     }
 
     @Test
