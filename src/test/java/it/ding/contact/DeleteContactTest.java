@@ -3,6 +3,7 @@ package it.ding.contact;
 import static it.ding.contact.data.TestData.ADMIN;
 import static it.ding.contact.data.TestData.ADMIN_PASSWORD;
 import static it.ding.contact.util.ContactTestUtil.generateContactWithAllFieldsFilled;
+import static it.ding.contact.util.ContactTestUtil.generateContactWithMandatoryFieldsFilled;
 import static org.apache.http.HttpStatus.SC_CREATED;
 import static org.apache.http.HttpStatus.SC_NOT_FOUND;
 import static org.apache.http.HttpStatus.SC_NO_CONTENT;
@@ -22,7 +23,7 @@ public class DeleteContactTest {
     private ContactRestClient contactRestClient = new ContactRestClient();
 
     @Test
-    public void canDeleteContact() {
+    public void canDeleteContactWithAllFieldsFilled() {
         Contact contact = generateContactWithAllFieldsFilled();
 
         loginRestClient.login(ADMIN, ADMIN_PASSWORD);
@@ -36,6 +37,52 @@ public class DeleteContactTest {
         contactRestClient.deleteContact(contactPostResponseBody.getId())
             .then()
             .statusCode(SC_OK);
+
+        contactRestClient.retrieveSingleContact(contactPostResponseBody.getId())
+            .then()
+            .statusCode(SC_NOT_FOUND);
+    }
+
+    @Test
+    public void canDeleteContactWithMandatoryFieldsFilled() {
+        Contact contact = generateContactWithMandatoryFieldsFilled();
+
+        loginRestClient.login(ADMIN, ADMIN_PASSWORD);
+
+        ContactPostResponseBody contactPostResponseBody = contactRestClient.createContact(contact)
+            .then()
+            .statusCode(SC_CREATED)
+            .extract()
+            .as(ContactPostResponseBody.class);
+
+        contactRestClient.deleteContact(contactPostResponseBody.getId())
+            .then()
+            .statusCode(SC_OK);
+
+        contactRestClient.retrieveSingleContact(contactPostResponseBody.getId())
+            .then()
+            .statusCode(SC_NOT_FOUND);
+    }
+
+    @Test
+    public void cannotDeleteSameContactTwice() {
+        Contact contact = generateContactWithAllFieldsFilled();
+
+        loginRestClient.login(ADMIN, ADMIN_PASSWORD);
+
+        ContactPostResponseBody contactPostResponseBody = contactRestClient.createContact(contact)
+            .then()
+            .statusCode(SC_CREATED)
+            .extract()
+            .as(ContactPostResponseBody.class);
+
+        contactRestClient.deleteContact(contactPostResponseBody.getId())
+            .then()
+            .statusCode(SC_OK);
+
+        contactRestClient.deleteContact(contactPostResponseBody.getId())
+            .then()
+            .statusCode(SC_NOT_FOUND);
 
         contactRestClient.retrieveSingleContact(contactPostResponseBody.getId())
             .then()

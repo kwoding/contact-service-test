@@ -1,6 +1,6 @@
 # Exercise 2: Create operation (extended)
 
-## Description exercise
+## Description
 Improve the existing test scenarios (from previous exercise)
 
 1. Create a Contact POJO and use this to create objects to POST contacts. Also, create a POJO for the error response body in case of error situations.

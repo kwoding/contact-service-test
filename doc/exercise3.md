@@ -1,6 +1,6 @@
 # Exercise 3: Update operation
 
-## Description exercise
+## Description
 1. Create and update contacts
 
 Create a contacts:

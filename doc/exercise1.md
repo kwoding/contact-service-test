@@ -40,7 +40,7 @@ Delete contact
 }
 ```
 
-## Description exercise
+## Description
 1. Login with `admin`/`password` using the already-created `LoginRestClient` in this project.
 2. Create contacts by POSTing contacts using the already-created `ContactRestClient` for:
 
