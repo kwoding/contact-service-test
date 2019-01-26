@@ -32,7 +32,7 @@ public class CreateContactTest {
     public void cleanUp() {
         loginRestClient.login(ADMIN, ADMIN_PASSWORD);
 
-        List<Contact> existingContacts = contactRestClient.retrieveContacts(0, 200, null)
+        List<Contact> existingContacts = contactRestClient.retrieveContacts(0, 200)
             .then()
             .statusCode(SC_OK)
             .extract()

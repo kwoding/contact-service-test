@@ -35,12 +35,11 @@ public class ContactRestClient extends RestClient {
             .get(CONTACTS);
     }
 
-    public Response retrieveContacts(int page, int size, String sortBy) {
+    public Response retrieveContacts(int page, int size) {
         return requestSpec()
             .contentType(JSON)
             .queryParam("page", page)
             .queryParam("size", size)
-            .queryParam("sort", sortBy == null ? "id,asc" : sortBy)
             .get(CONTACTS);
     }
 

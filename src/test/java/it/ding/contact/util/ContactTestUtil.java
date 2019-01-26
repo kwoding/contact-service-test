@@ -1,11 +1,8 @@
 package it.ding.contact.util;
 
-import static java.util.Comparator.comparing;
-
 import com.github.javafaker.Faker;
 import it.ding.contact.model.Contact;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class ContactTestUtil {
@@ -50,10 +47,6 @@ public class ContactTestUtil {
             .countrySubDivision(faker.address().state())
             .country(faker.address().country())
             .build();
-    }
-
-    public static void sortContactsById(List<Contact> contactList) {
-        contactList.sort(comparing(Contact::getId));
     }
 
 }
