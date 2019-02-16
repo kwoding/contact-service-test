@@ -3,7 +3,6 @@ package it.ding.contact.client;
 import static io.restassured.http.ContentType.JSON;
 
 import io.restassured.response.Response;
-import it.ding.contact.model.Contact;
 import java.util.Map;
 
 public class ContactRestClient extends RestClient {
@@ -20,39 +19,6 @@ public class ContactRestClient extends RestClient {
             .contentType(JSON)
             .body(contact)
             .post(CONTACTS);
-    }
-
-    public Response createContact(Contact contact) {
-        return requestSpec()
-            .contentType(JSON)
-            .body(contact)
-            .post(CONTACTS);
-    }
-
-    public Response retrieveContacts() {
-        return requestSpec()
-            .contentType(JSON)
-            .get(CONTACTS);
-    }
-
-    public Response retrieveContacts(int page, int size) {
-        return requestSpec()
-            .contentType(JSON)
-            .queryParam("page", page)
-            .queryParam("size", size)
-            .get(CONTACTS);
-    }
-
-    public Response retrieveSingleContact(Long contactId) {
-        return requestSpec()
-            .contentType(JSON)
-            .get(CONTACTS  + "/" + contactId);
-    }
-
-    public Response deleteContact(Long contactId) {
-        return requestSpec()
-            .contentType(JSON)
-            .delete(CONTACTS + "/" + contactId);
     }
 
 }
