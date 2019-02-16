@@ -49,13 +49,6 @@ public class ContactRestClient extends RestClient {
             .get(CONTACTS  + "/" + contactId);
     }
 
-    public Response updateContact(Long contactId, Contact contact) {
-        return requestSpec()
-            .contentType(JSON)
-            .body(contact)
-            .put(CONTACTS + "/" + contactId);
-    }
-
     public Response deleteContact(Long contactId) {
         return requestSpec()
             .contentType(JSON)
