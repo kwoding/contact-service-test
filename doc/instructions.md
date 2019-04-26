@@ -26,7 +26,7 @@ docker run -p 8080:8080 kwoding/contact-service:latest
 
 4. Navigate in your browser to http://localhost:8080, you should see the following on your screen.
 
-![SonarQube rule overview](./img/404_page.png)
+![Default 404 page](./img/404_page.png)
 
 5. Run the following command to ensure you have everything set up.
 
@@ -34,7 +34,7 @@ docker run -p 8080:8080 kwoding/contact-service:latest
 mvn clean test
 ```
 
-Expected result should be a successful build:
+Expected result is a successful build:
 ```
 -------------------------------------------------------
  T E S T S
