@@ -17,6 +17,7 @@ import it.ding.contact.client.LoginRestClient;
 import it.ding.contact.model.Contact;
 import it.ding.contact.model.ContactPostResponseBody;
 import it.ding.contact.model.ErrorResponseBody;
+import org.apache.commons.lang.RandomStringUtils;
 import org.junit.Test;
 
 public class UpdateContactTest {
@@ -117,7 +118,7 @@ public class UpdateContactTest {
         Contact contact = generateContactWithAllFieldsFilled();
         Contact updatedContact = generateContactWithMandatoryFieldsFilled();
 
-        updatedContact.setFirstName(null);
+        updatedContact.setEmail(RandomStringUtils.randomAlphabetic(8));
 
         loginRestClient.login(ADMIN, ADMIN_PASSWORD);
 
