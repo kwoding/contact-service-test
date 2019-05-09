@@ -28,11 +28,15 @@ docker run -p 8080:8080 kwoding/contact-service:latest
 
 ![Default 404 page](./img/404_page.png)
 
+**Note:** If you are running Docker Toolbox (Windows) the default IP is `192.168.99.100` (you can check by running `docker-machine ip default`), so navigate in your browser to http://192.168.99.100:8080 instead.
+
 5. Run the following command to ensure you have everything set up.
 
 ```
 mvn clean test
 ```
+
+**Note:** If you are running Docker Toolbox (Windows), run the command `mvn clean test -Dbase.uri=http://192.168.99.100:8080`
 
 Expected result is a successful build:
 ```
