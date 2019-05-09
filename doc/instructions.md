@@ -38,7 +38,7 @@ mvn clean test
 
 **Note:** If you are running Docker Toolbox (Windows), run the command
 ```
-mvn clean test -Dbase.uri=http://192.168.99.100:8080`
+mvn clean test -Dbase.uri=http://192.168.99.100:8080
 ```
 
 Expected result is a successful build:
