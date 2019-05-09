@@ -26,9 +26,9 @@ docker run -p 8080:8080 kwoding/contact-service:latest
 
 4. Navigate in your browser to http://localhost:8080, you should see the following on your screen.
 
-![Default 404 page](./img/404_page.png)
-
 **Note:** If you are running Docker Toolbox (Windows) the default IP is `192.168.99.100` (you can check by running `docker-machine ip default`), so navigate in your browser to http://192.168.99.100:8080 instead.
+
+![Default 404 page](./img/404_page.png)
 
 5. Run the following command to ensure you have everything set up.
 
