@@ -29,8 +29,8 @@ import static io.restassured.config.HttpClientConfig.httpClientConfig;
 
 public class RestClient {
 
-    private GlobalProperties globalProperties = GlobalProperties.getInstance();
-    private static final String CONNECTION_MANAGER_TIMEOUT = "CONNECTION_MANAGER_TIMEOUT";
+    private static final GlobalProperties globalProperties = GlobalProperties.getInstance();
+    private static final String CONNECTION_MANAGER_TIMEOUT = "http.connection.timeout";
     private static final int TIMEOUT_VALUE = 10000;
     private static final String PROPERTY_LOG_ALL_REQUESTS_RESPONSES = "log.all.requests.responses";
 

@@ -1,14 +1,17 @@
 package it.ding.contact.client;
 
+import static it.ding.contact.data.CommonData.PROPERTY_BASE_URI;
 import static org.apache.http.HttpStatus.SC_OK;
 
 import io.restassured.response.ValidatableResponse;
+import it.ding.contact.util.GlobalProperties;
 import java.util.HashMap;
 import java.util.Map;
 
 public class LoginRestClient extends RestClient {
 
-    private static final String BASE_URI = "http://localhost:8080";
+    private static final GlobalProperties globalProperties = GlobalProperties.getInstance();
+    private static final String BASE_URI = globalProperties.getString(PROPERTY_BASE_URI);
     private static final String LOGIN = "/login";
 
     public LoginRestClient() {
