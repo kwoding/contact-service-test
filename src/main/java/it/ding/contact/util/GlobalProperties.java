@@ -26,14 +26,14 @@ public class GlobalProperties {
 
     private static GlobalProperties instance;
     private CompositeConfiguration configuration;
-    private static final String TEST_PROPERTIES = "test.properties";
+    private static final String ENVIRONMENT_PROPERTIES = "environment.properties";
 
     private GlobalProperties() {
         configuration = new CompositeConfiguration();
         configuration.addConfiguration(new SystemConfiguration());
         configuration.addConfiguration(new EnvironmentConfiguration());
         try {
-            configuration.addConfiguration(new PropertiesConfiguration(TEST_PROPERTIES));
+            configuration.addConfiguration(new PropertiesConfiguration(ENVIRONMENT_PROPERTIES));
         } catch (ConfigurationException ignored) {
         }
     }
