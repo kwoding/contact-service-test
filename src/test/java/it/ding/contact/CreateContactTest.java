@@ -27,8 +27,8 @@ public class CreateContactTest {
 
         // Create contact via API (use ContactRestClient)
 
-        // Assert HTTP status code, use `.then().status()` on the Response object
-        // Mapping the response body can be done by `.then().extract().as(ClassName.class)`
+        // Assert HTTP status code, use `.then().statusCode()` on the Response object
+        // Mapping the response body can be done by `.then().extract().as(ContactPostResponseBody.class)`
 
         // Assert response body (id is not null)
     }
