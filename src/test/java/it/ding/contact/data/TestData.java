@@ -4,6 +4,6 @@ public class TestData {
 
     public static final String ADMIN = "admin";
 
-    public static final String ADMIN_PASSWORD = "password";
+    public static final String ADMIN_PASSWORD = "admin";
 
 }

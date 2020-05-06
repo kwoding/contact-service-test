@@ -3,111 +3,73 @@ package it.ding.contact.client;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import io.restassured.RestAssured;
-import io.restassured.config.LogConfig;
-import io.restassured.config.ObjectMapperConfig;
 import io.restassured.config.RestAssuredConfig;
 import io.restassured.filter.log.RequestLoggingFilter;
 import io.restassured.filter.log.ResponseLoggingFilter;
-import io.restassured.internal.RequestSpecificationImpl;
 import io.restassured.internal.ResponseParserRegistrar;
-import io.restassured.internal.ResponseSpecificationImpl;
-import io.restassured.internal.TestSpecificationImpl;
-import io.restassured.internal.log.LogRepository;
 import io.restassured.specification.RequestSpecification;
 import it.ding.contact.util.GlobalProperties;
 import java.util.NoSuchElementException;
-import org.apache.http.client.utils.URIBuilder;
 
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
 import static io.restassured.config.HttpClientConfig.httpClientConfig;
+import static io.restassured.config.ObjectMapperConfig.objectMapperConfig;
 
 public class RestClient {
 
     private static final GlobalProperties globalProperties = GlobalProperties.getInstance();
     private static final String CONNECTION_MANAGER_TIMEOUT = "http.connection.timeout";
-    private static final int TIMEOUT_VALUE = 10000;
+    private static final int TIMEOUT_IN_MILLISECONDS = 10000;
     private static final String PROPERTY_LOG_ALL_REQUESTS_RESPONSES = "log.all.requests.responses";
-
-    private URI baseURI = null;
-    private RestAssuredConfig restAssuredConfig;
-    private String initialPath = "";
-    private String version;
+    private URI baseUri = null;
+    private String basePath = "";
 
     private static Map<String, String> cookiesJar = new LinkedHashMap<>();
-    private final ResponseParserRegistrar responseParserRegistrar = new ResponseParserRegistrar();
 
     RestClient(String baseUri) {
         setBaseUri(baseUri);
     }
 
-    RestClient(String baseUri, String version) {
+    RestClient(String baseUri, String basePath) {
         setBaseUri(baseUri);
-        this.version = version;
+        setBasePath(basePath);
     }
 
-    public RestClient setInitialPath(String initialPath) {
-        this.initialPath = initialPath;
-        return this;
+    public String getBasePath() {
+        return basePath;
     }
 
-    public RestAssuredConfig getRestAssuredConfig() {
-        return restAssuredConfig;
-    }
-
-    public String getInitialPath() {
-        return initialPath;
-    }
-
-    public String getPath(String endpoint) {
-        return version + endpoint;
-    }
-
-    public String getBaseURIWithoutPort() {
-        String baseAPI;
-
-        URI uri;
-        try {
-            uri = new URIBuilder().setScheme(baseURI.getScheme()).setHost(baseURI.getHost()).build();
-        } catch (URISyntaxException e) {
-            throw new IllegalArgumentException("An error occurred while constructing base uri without port", e);
-        }
-        baseAPI = uri.toString();
-        return baseAPI;
+    public void setBasePath(String basePath) {
+        this.basePath = basePath;
     }
 
     public RequestSpecification requestSpec() {
-        LogRepository logRepository = new LogRepository();
-        restAssuredConfig = RestAssuredConfig.config()
-            .objectMapperConfig(new ObjectMapperConfig().jackson2ObjectMapperFactory(
-                (aClass, s) -> new ObjectMapper().configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false)
-                    .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false)
-            ))
-            .logConfig(LogConfig.logConfig().enableLoggingOfRequestAndResponseIfValidationFails())
-            .httpClient(httpClientConfig().setParam(CONNECTION_MANAGER_TIMEOUT, TIMEOUT_VALUE));
+        RestAssuredConfig config = RestAssured.config()
+            .objectMapperConfig(objectMapperConfig()
+                .jackson2ObjectMapperFactory((cls, charset) -> new ObjectMapper()
+                    .registerModule(new JavaTimeModule())
+                    .configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false)
+                    .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false)))
+            .httpClient(httpClientConfig().setParam(CONNECTION_MANAGER_TIMEOUT, TIMEOUT_IN_MILLISECONDS));
 
-        RequestSpecification requestSpec = new TestSpecificationImpl(
-            new RequestSpecificationImpl(getBaseURI().toString(),
-                getBaseURI().getPort(), getInitialPath(), RestAssured.DEFAULT_AUTH, Collections.emptyList(), null,
-                RestAssured.DEFAULT_URL_ENCODING_ENABLED, restAssuredConfig, logRepository, null),
-            new ResponseSpecificationImpl(RestAssured.DEFAULT_BODY_ROOT_PATH, null, this.responseParserRegistrar,
-                restAssuredConfig, logRepository)).
-            getRequestSpecification();
+        RequestSpecification requestSpecification = RestAssured.with()
+            .relaxedHTTPSValidation()
+            .config(config)
+            .baseUri(getBaseUri().toString())
+            .basePath(getBasePath());
 
-        setLoggingFilters(requestSpec);
+        setLoggingFilters(requestSpecification);
 
-        requestSpec.queryParam("_csrf", getCookies().get("XSRF-TOKEN"));
+        requestSpecification.cookies(getCookies());
 
-        requestSpec.cookies(getCookies());
-
-        return requestSpec;
+        return requestSpecification;
     }
-
 
     protected static void setUpCookies(Map<String, String> cookies) {
         cookiesJar.putAll(cookies);
@@ -115,7 +77,7 @@ public class RestClient {
 
     private void setBaseUri(String baseUri) {
         try {
-            this.baseURI = new URI(baseUri);
+            this.baseUri = new URI(baseUri);
         } catch (URISyntaxException e) {
             throw new IllegalArgumentException("An error occurred while creating RestClient, 'baseUri' is incorrect", e);
         }
@@ -125,8 +87,8 @@ public class RestClient {
         return cookiesJar;
     }
 
-    private URI getBaseURI() {
-        return baseURI;
+    private URI getBaseUri() {
+        return baseUri;
     }
 
     private void setLoggingFilters(RequestSpecification requestSpec) {
