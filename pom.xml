@@ -10,12 +10,11 @@
     <properties>
         <junit.version>5.1.0</junit.version>
         <assertj-core.version>3.16.1</assertj-core.version>
-        <rest-assured.version>3.2.0</rest-assured.version>
-        <jackson-databind.version>2.9.9</jackson-databind.version>
-        <jackson-datatype.version>2.9.7</jackson-datatype.version>
+        <rest-assured.version>3.3.0</rest-assured.version>
+        <jackson-databind.version>2.11.0</jackson-databind.version>
+        <jackson-datatype.version>2.11.0</jackson-datatype.version>
         <commons-configuration.version>1.10</commons-configuration.version>
-        <lombok.version>1.18.4</lombok.version>
-        <javafaker.version>0.16</javafaker.version>
+        <javafaker.version>1.0.2</javafaker.version>
     </properties>
 
     <dependencies>

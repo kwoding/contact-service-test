@@ -36,16 +36,7 @@ public class PaginationExerciseTest {
     void createContacts() {
         loginRestClient.login(ADMIN, ADMIN_PASSWORD);
 
-        List<Contact> existingContacts = contactRestClient.getContacts(0, 200)
-            .then()
-            .statusCode(SC_OK)
-            .extract()
-            .as(ContactListGetResponseBody.class)
-            .getContent();
-
-        for (Contact existingContact : existingContacts) {
-            contactRestClient.deleteContact(existingContact.getId());
-        }
+        // Remove all existing contacts
 
         // Create multiple contacts, use variable TOTAL_CONTACT_SIZE for the number of contacts to create
 
@@ -59,9 +50,10 @@ public class PaginationExerciseTest {
 
         // Paginate/iterate through all pages
 
-//        List<Contact> actualContacts = contactRestClient.getContacts(page, PAGE_SIZE)
-//            .then()
-//            .statusCode(SC_OK)
+        // Retrieve contact by using the new method getContacts(page, size)
+//        contactRestClient.getContacts(page, PAGE_SIZE)
+
+//        Extract response body
 //            .extract()
 //            .as(ContactListGetResponseBody.class)
 //            .getContent();
