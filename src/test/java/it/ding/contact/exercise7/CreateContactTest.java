@@ -3,7 +3,6 @@ package it.ding.contact.exercise7;
 import static it.ding.contact.data.TestData.ADMIN;
 import static it.ding.contact.data.TestData.ADMIN_PASSWORD;
 
-import it.ding.contact.client.ContactRestClientV1;
 import it.ding.contact.client.ContactRestClientV2;
 import it.ding.contact.client.LoginRestClient;
 import java.util.HashMap;

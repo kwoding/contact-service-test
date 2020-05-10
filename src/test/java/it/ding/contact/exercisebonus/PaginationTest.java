@@ -15,6 +15,7 @@ import it.ding.contact.model.ContactListGetResponseBody;
 import it.ding.contact.model.ContactPostResponseBody;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.IntStream;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -25,6 +26,12 @@ public class PaginationTest {
     private ContactRestClient contactRestClient = new ContactRestClient();
 
     private List<Contact> contactList = new ArrayList<>();
+
+    private static final int PAGE_SIZE = 5;
+
+    private static final int TOTAL_CONTACT_SIZE = 18;
+
+    private static final double TOTAL_PAGES = Math.round(TOTAL_CONTACT_SIZE / PAGE_SIZE);
 
     @BeforeEach
     void createContacts() {
@@ -41,7 +48,7 @@ public class PaginationTest {
             contactRestClient.deleteContact(existingContact.getId());
         }
 
-        for (int i = 0; i < 105; i++) {
+        IntStream.range(0, TOTAL_CONTACT_SIZE).forEach(i -> {
             Contact contact = generateContactWithAllFieldsFilled();
 
             ContactPostResponseBody contactPostResponseBody = contactRestClient.createContact(contact)
@@ -53,39 +60,33 @@ public class PaginationTest {
             contact.setId(contactPostResponseBody.getId());
 
             contactList.add(contact);
-        }
+        });
     }
 
     @Test
     void canPaginateContacts() {
-        int sizeField = 36;
-
-        double numberOfPages = Math.round(contactList.size() / sizeField);
-        for (int pageField = 0; pageField <= numberOfPages; pageField++) {
-
+        for (int page = 0; page <= TOTAL_PAGES; page++) {
             List<Contact> actualContacts = contactRestClient.getContacts(
-                pageField,
-                sizeField)
+                page,
+                PAGE_SIZE)
                 .then()
                 .statusCode(SC_OK)
                 .extract()
                 .as(ContactListGetResponseBody.class)
                 .getContent();
 
-            assertContacts(actualContacts, contactList, pageField, sizeField);
+            assertContacts(actualContacts, contactList, page, PAGE_SIZE);
         }
     }
 
     @Test
-    void noContactsWhenFromIsGreaterThanNumberOfPages() {
-        int sizeField = 24;
+    void noContactsWhenPageIsGreaterThanNumberOfPages() {
+        int startPage = (int) TOTAL_PAGES + 1;
 
-        double numberOfPages = Math.ceil(contactList.size() / sizeField);
-        for (int pageField = (int) numberOfPages + 1; pageField <= 11; pageField++) {
-
+        for (int page = startPage; page <= (startPage + 3); page++) {
             List<Contact> actualContacts = contactRestClient.getContacts(
-                pageField,
-                sizeField)
+                page,
+                PAGE_SIZE)
                 .then()
                 .statusCode(SC_OK)
                 .extract()
