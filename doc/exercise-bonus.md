@@ -1,4 +1,4 @@
-# Exercise 18: Assert deletion
+# Exercise 18: Pagination
 
 ## Description
 1. Extend the `ContactRestClient` by adding a new method: `getContacts(int page, int size)`

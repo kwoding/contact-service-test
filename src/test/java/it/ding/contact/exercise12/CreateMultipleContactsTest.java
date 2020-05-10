@@ -4,7 +4,7 @@ import static it.ding.contact.data.TestData.ADMIN;
 import static it.ding.contact.data.TestData.ADMIN_PASSWORD;
 import static org.apache.http.HttpStatus.SC_CREATED;
 
-import it.ding.contact.client.ContactRestClientV5;
+import it.ding.contact.client.ContactRestClientV6;
 import it.ding.contact.client.LoginRestClient;
 import it.ding.contact.model.Contact;
 import java.util.ArrayList;
@@ -16,7 +16,7 @@ public class CreateMultipleContactsTest {
 
     private LoginRestClient loginRestClient = new LoginRestClient();
 
-    private ContactRestClientV5 contactRestClient = new ContactRestClientV5();
+    private ContactRestClientV6 contactRestClient = new ContactRestClientV6();
 
     @BeforeEach
     void login() {

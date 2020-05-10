@@ -6,9 +6,8 @@ import static it.ding.contact.data.CommonData.PROPERTY_BASE_URI;
 import io.restassured.response.Response;
 import it.ding.contact.model.Contact;
 import it.ding.contact.util.GlobalProperties;
-import java.util.Map;
 
-public class ContactRestClient extends RestClient {
+public class ContactRestClientV8 extends RestClient {
 
     private static final GlobalProperties globalProperties = GlobalProperties.getInstance();
 
@@ -18,15 +17,8 @@ public class ContactRestClient extends RestClient {
 
     private static final String CONTACTS = "/contacts";
 
-    public ContactRestClient() {
+    public ContactRestClientV8() {
         super(BASE_URI, BASE_PATH);
-    }
-
-    public Response createContact(Map<String, String> contact) {
-        return requestSpec()
-            .contentType(JSON)
-            .body(contact)
-            .post(CONTACTS);
     }
 
     public Response createContact(Contact contact) {
@@ -36,25 +28,16 @@ public class ContactRestClient extends RestClient {
             .post(CONTACTS);
     }
 
-    public Response getContacts() {
-        return requestSpec()
-            .contentType(JSON)
-            .get(CONTACTS);
-    }
-
-    public Response getContacts(int page, int size) {
-        return requestSpec()
-            .contentType(JSON)
-            .queryParam("page", page)
-            .queryParam("size", size)
-            .queryParam("sort", "id,asc")
-            .get(CONTACTS);
-    }
-
     public Response getContact(Long contactId) {
         return requestSpec()
             .contentType(JSON)
             .get(CONTACTS  + "/" + contactId);
+    }
+
+    public Response getContacts() {
+        return requestSpec()
+            .contentType(JSON)
+            .get(CONTACTS);
     }
 
     public Response updateContact(Long contactId, Contact contact) {
@@ -63,11 +46,4 @@ public class ContactRestClient extends RestClient {
             .body(contact)
             .put(CONTACTS + "/" + contactId);
     }
-
-    public Response deleteContact(Long contactId) {
-        return requestSpec()
-            .contentType(JSON)
-            .delete(CONTACTS + "/" + contactId);
-    }
-
 }

@@ -1,4 +1,4 @@
-# Exercise 18: Assert deletion
+# Exercise 18: Assert delete contact
 
 ## Description
 1. Create a contact
