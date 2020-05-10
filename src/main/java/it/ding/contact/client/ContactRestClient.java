@@ -11,12 +11,15 @@ import java.util.Map;
 public class ContactRestClient extends RestClient {
 
     private static final GlobalProperties globalProperties = GlobalProperties.getInstance();
+
     private static final String BASE_URI = globalProperties.getString(PROPERTY_BASE_URI);
-    private static final String BASE_URI_API = BASE_URI + "/api";
+
+    private static final String BASE_PATH = "/api";
+
     private static final String CONTACTS = "/contacts";
 
     public ContactRestClient() {
-        super(BASE_URI_API);
+        super(BASE_URI, BASE_PATH);
     }
 
     public Response createContact(Map<String, String> contact) {
@@ -33,13 +36,13 @@ public class ContactRestClient extends RestClient {
             .post(CONTACTS);
     }
 
-    public Response retrieveContacts() {
+    public Response getContacts() {
         return requestSpec()
             .contentType(JSON)
             .get(CONTACTS);
     }
 
-    public Response retrieveContacts(int page, int size, String sortBy) {
+    public Response getContacts(int page, int size, String sortBy) {
         return requestSpec()
             .contentType(JSON)
             .queryParam("page", page)
@@ -48,7 +51,7 @@ public class ContactRestClient extends RestClient {
             .get(CONTACTS);
     }
 
-    public Response retrieveSingleContact(Long contactId) {
+    public Response getContact(Long contactId) {
         return requestSpec()
             .contentType(JSON)
             .get(CONTACTS  + "/" + contactId);

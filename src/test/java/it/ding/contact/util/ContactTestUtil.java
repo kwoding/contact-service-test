@@ -13,11 +13,10 @@ public class ContactTestUtil {
     private static Faker faker = new Faker();
 
     public static Contact generateContactWithMandatoryFieldsFilled() {
-        return Contact.builder()
-            .lastName(faker.name().lastName())
-            .firstName(faker.name().firstName())
-            .email(faker.internet().emailAddress())
-            .build();
+        return new Contact()
+            .withLastName(faker.name().lastName())
+            .withFirstName(faker.name().firstName())
+            .withEmail(faker.internet().emailAddress());
     }
 
     public static Map<String, String> generateContactMapWithAllFieldsFilled() {
@@ -38,18 +37,17 @@ public class ContactTestUtil {
     }
 
     public static Contact generateContactWithAllFieldsFilled() {
-        return Contact.builder()
-            .lastName(faker.name().lastName())
-            .firstName(faker.name().firstName())
-            .email(faker.internet().emailAddress())
-            .phone(faker.phoneNumber().phoneNumber())
-            .addressLine1(faker.address().streetAddress())
-            .addressLine2(faker.address().streetAddress())
-            .city(faker.address().city())
-            .zipCode(faker.address().zipCode())
-            .countrySubDivision(faker.address().state())
-            .country(faker.address().country())
-            .build();
+        return new Contact()
+            .withLastName(faker.name().lastName())
+            .withFirstName(faker.name().firstName())
+            .withEmail(faker.internet().emailAddress())
+            .withPhone(faker.phoneNumber().phoneNumber())
+            .withAddressLine1(faker.address().streetAddress())
+            .withAddressLine2(faker.address().streetAddress())
+            .withCity(faker.address().city())
+            .withZipCode(faker.address().zipCode())
+            .withCountrySubDivision(faker.address().state())
+            .withCountry(faker.address().country());
     }
 
     public static void sortContactsById(List<Contact> contactList) {
