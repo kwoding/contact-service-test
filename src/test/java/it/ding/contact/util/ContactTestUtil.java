@@ -50,8 +50,4 @@ public class ContactTestUtil {
             .withCountry(faker.address().country());
     }
 
-    public static void sortContactsById(List<Contact> contactList) {
-        contactList.sort(comparing(Contact::getId));
-    }
-
 }
