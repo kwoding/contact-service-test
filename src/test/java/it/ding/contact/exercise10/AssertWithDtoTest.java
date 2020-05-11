@@ -6,7 +6,6 @@ import static org.apache.http.HttpStatus.SC_CREATED;
 import static org.apache.http.HttpStatus.SC_OK;
 import static org.assertj.core.api.Assertions.assertThat;
 
-import it.ding.contact.client.ContactRestClientV4;
 import it.ding.contact.client.ContactRestClientV5;
 import it.ding.contact.client.LoginRestClient;
 import it.ding.contact.model.Contact;
