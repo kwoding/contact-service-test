@@ -19,7 +19,7 @@ public class LoginWithReusableClientTest {
 
     @Test
     void cannotLoginWithInvalidCredentialsWithReusableClient() {
-        // Login with LoginRestClientV1 using the login() method
+        // Login with LoginRestClientV1 using the login() method with invalid credentials
 //        loginRestClient.
         // Assert status code (401)
     }
