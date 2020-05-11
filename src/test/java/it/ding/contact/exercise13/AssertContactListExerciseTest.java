@@ -6,7 +6,6 @@ import static it.ding.contact.util.ContactTestUtil.generateContactWithAllFieldsF
 import static org.apache.http.HttpStatus.SC_CREATED;
 import static org.assertj.core.api.Assertions.assertThat;
 
-import it.ding.contact.client.ContactRestClientV6;
 import it.ding.contact.client.ContactRestClientV7;
 import it.ding.contact.client.LoginRestClient;
 import it.ding.contact.model.Contact;
