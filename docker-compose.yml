@@ -1,0 +1,13 @@
+version: '3'
+
+services:
+  contact-frontend:
+    image: kwoding/contact-frontend:latest
+    ports:
+    - 3000:3000
+    depends_on:
+    - contact-service
+  contact-service:
+    image: kwoding/contact-service:latest
+    ports:
+    - 8080:8080
