@@ -44,10 +44,10 @@ public class AssertDeleteContactTest {
 
         // Assert status code
 
-        // Extract response body using .extract().as(ContactListGetResponseBody.class);
+        // Extract response body using .extract().as(ContactListGetResponseBody.class).getContent();
 
         // Assert contact list
-//        assertThat(responseBody).isEqualTo();
+//        assertThat(actualContacts).isEmpty();
     }
 
     @Test
