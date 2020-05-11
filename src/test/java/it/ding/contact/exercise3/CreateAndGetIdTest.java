@@ -55,5 +55,7 @@ public class CreateAndGetIdTest {
             .statusCode(201);
             // Extract id from response body by adding .extract().jsonPath()
 //            .extract().jsonPath().get()
+
+        // Retrieve contact by performing a GET on /api/contacts/{contactId}
     }
 }
