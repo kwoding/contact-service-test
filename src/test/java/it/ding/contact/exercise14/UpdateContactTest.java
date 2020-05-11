@@ -4,7 +4,7 @@ import static it.ding.contact.data.TestData.ADMIN;
 import static it.ding.contact.data.TestData.ADMIN_PASSWORD;
 import static org.apache.http.HttpStatus.SC_CREATED;
 
-import it.ding.contact.client.ContactRestClientV7;
+import it.ding.contact.client.ContactRestClientV8;
 import it.ding.contact.client.LoginRestClient;
 import it.ding.contact.model.Contact;
 import it.ding.contact.model.ContactPostResponseBody;
@@ -15,7 +15,7 @@ public class UpdateContactTest {
 
     private LoginRestClient loginRestClient = new LoginRestClient();
 
-    private ContactRestClientV7 contactRestClient = new ContactRestClientV7();
+    private ContactRestClientV8 contactRestClient = new ContactRestClientV8();
 
     @BeforeEach
     void login() {

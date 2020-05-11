@@ -46,8 +46,4 @@ public class ContactRestClientV9 extends RestClient {
             .body(contact)
             .put(CONTACTS + "/" + contactId);
     }
-
-//    public Response deleteContact(Long contactId) {
-//        // Implement this method
-//    }
 }

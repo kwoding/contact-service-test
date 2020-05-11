@@ -4,10 +4,9 @@ import static it.ding.contact.data.TestData.ADMIN;
 import static it.ding.contact.data.TestData.ADMIN_PASSWORD;
 import static it.ding.contact.util.ContactTestUtil.generateContactWithAllFieldsFilled;
 import static org.apache.http.HttpStatus.SC_CREATED;
-import static org.apache.http.HttpStatus.SC_NO_CONTENT;
 import static org.assertj.core.api.Assertions.assertThat;
 
-import it.ding.contact.client.ContactRestClientV8;
+import it.ding.contact.client.ContactRestClientV9;
 import it.ding.contact.client.LoginRestClient;
 import it.ding.contact.model.Contact;
 import it.ding.contact.model.ContactPostResponseBody;
@@ -18,7 +17,7 @@ public class UpdateContactErrorTest {
 
     private LoginRestClient loginRestClient = new LoginRestClient();
 
-    private ContactRestClientV8 contactRestClient = new ContactRestClientV8();
+    private ContactRestClientV9 contactRestClient = new ContactRestClientV9();
 
     @BeforeEach
     void login() {

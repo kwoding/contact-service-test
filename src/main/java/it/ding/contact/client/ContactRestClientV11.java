@@ -7,7 +7,7 @@ import io.restassured.response.Response;
 import it.ding.contact.model.Contact;
 import it.ding.contact.util.GlobalProperties;
 
-public class ContactRestClientV8 extends RestClient {
+public class ContactRestClientV11 extends RestClient {
 
     private static final GlobalProperties globalProperties = GlobalProperties.getInstance();
 
@@ -17,7 +17,7 @@ public class ContactRestClientV8 extends RestClient {
 
     private static final String CONTACTS = "/contacts";
 
-    public ContactRestClientV8() {
+    public ContactRestClientV11() {
         super(BASE_URI, BASE_PATH);
     }
 
@@ -40,7 +40,16 @@ public class ContactRestClientV8 extends RestClient {
             .get(CONTACTS);
     }
 
-//    public Response updateContact(Long contactId, Contact contact) {
-//        // Implement this method
-//    }
+    public Response updateContact(Long contactId, Contact contact) {
+        return requestSpec()
+            .contentType(JSON)
+            .body(contact)
+            .put(CONTACTS + "/" + contactId);
+    }
+
+    public Response deleteContact(Long contactId) {
+        return requestSpec()
+            .contentType(JSON)
+            .delete(CONTACTS + "/" + contactId);
+    }
 }

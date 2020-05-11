@@ -39,8 +39,4 @@ public class ContactRestClientV7 extends RestClient {
             .contentType(JSON)
             .get(CONTACTS);
     }
-
-//    public Response updateContact(Long contactId, Contact contact) {
-//        // Implement this method
-//    }
 }

@@ -6,7 +6,8 @@ import static it.ding.contact.util.ContactTestUtil.generateContactWithAllFieldsF
 import static org.apache.http.HttpStatus.SC_CREATED;
 import static org.assertj.core.api.Assertions.assertThat;
 
-import it.ding.contact.client.ContactRestClientV5;
+import it.ding.contact.client.ContactRestClientV6;
+import it.ding.contact.client.ContactRestClientV7;
 import it.ding.contact.client.LoginRestClient;
 import it.ding.contact.model.Contact;
 import it.ding.contact.model.ContactListGetResponseBody;
@@ -20,7 +21,7 @@ public class AssertContactListTest {
 
     private LoginRestClient loginRestClient = new LoginRestClient();
 
-    private ContactRestClientV5 contactRestClient = new ContactRestClientV5();
+    private ContactRestClientV7 contactRestClient = new ContactRestClientV7();
 
     @BeforeEach
     void login() {

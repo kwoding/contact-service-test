@@ -5,7 +5,7 @@ import static it.ding.contact.data.TestData.ADMIN_PASSWORD;
 import static it.ding.contact.util.ContactTestUtil.generateContactWithAllFieldsFilled;
 import static org.apache.http.HttpStatus.SC_CREATED;
 
-import it.ding.contact.client.ContactRestClientV9;
+import it.ding.contact.client.ContactRestClientV10;
 import it.ding.contact.client.LoginRestClient;
 import it.ding.contact.model.Contact;
 import it.ding.contact.model.ContactPostResponseBody;
@@ -16,7 +16,7 @@ public class DeleteContactTest {
 
     private LoginRestClient loginRestClient = new LoginRestClient();
 
-    private ContactRestClientV9 contactRestClient = new ContactRestClientV9();
+    private ContactRestClientV10 contactRestClient = new ContactRestClientV10();
 
     @BeforeEach
     void login() {

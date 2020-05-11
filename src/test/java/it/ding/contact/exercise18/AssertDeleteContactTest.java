@@ -7,7 +7,7 @@ import static org.apache.http.HttpStatus.SC_CREATED;
 import static org.apache.http.HttpStatus.SC_OK;
 import static org.assertj.core.api.Assertions.assertThat;
 
-import it.ding.contact.client.ContactRestClientV10;
+import it.ding.contact.client.ContactRestClientV11;
 import it.ding.contact.client.LoginRestClient;
 import it.ding.contact.model.Contact;
 import it.ding.contact.model.ContactPostResponseBody;
@@ -18,7 +18,7 @@ public class AssertDeleteContactTest {
 
     private LoginRestClient loginRestClient = new LoginRestClient();
 
-    private ContactRestClientV10 contactRestClient = new ContactRestClientV10();
+    private ContactRestClientV11 contactRestClient = new ContactRestClientV11();
 
     @BeforeEach
     void login() {
