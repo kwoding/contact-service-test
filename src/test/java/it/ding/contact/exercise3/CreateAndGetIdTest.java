@@ -57,5 +57,7 @@ public class CreateAndGetIdTest {
 //            .extract().jsonPath().get()
 
         // Retrieve contact by performing a GET on /api/contacts/{contactId}
+
+        // Assert status code (200)
     }
 }
