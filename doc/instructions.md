@@ -48,18 +48,21 @@ mvn clean test -Dbase.uri=http://192.168.99.100:3000
 
 Expected result is a successful build (partial log listed below as an example):
 ```
--------------------------------------------------------
- T E S T S
--------------------------------------------------------
-Running it.ding.contact.exercise1.LoginTest
-Tests run: 0, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0 sec
+[INFO] -------------------------------------------------------
+[INFO]  T E S T S
+[INFO] -------------------------------------------------------
+[INFO] Running it.ding.contact.exercise1.LoginTest
 
-Results :
+(...)
 
-Tests run: 1, Failures: 0, Errors: 0, Skipped: 0
-
+[INFO] Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.046 s - in it.ding.contact.exercise1.LoginTest
+[INFO] 
+[INFO] Results:
+[INFO] 
+[INFO] Tests run: 2, Failures: 0, Errors: 0, Skipped: 0
+[INFO] 
 [INFO] ------------------------------------------------------------------------
 [INFO] BUILD SUCCESS
 [INFO] ------------------------------------------------------------------------
-...
+(...)
 ```
