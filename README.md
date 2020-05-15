@@ -12,6 +12,10 @@ docker run -p 8080:8080 kwoding/contact-service:latest
 
 2. Run each test from your IDE or run `mvn clean test` to run the complete test suite.
 
+Notes:
+- Service running on: `http://localhost:8080`
+- Browse database via: `http://localhost:8080/h2-console` with JDBC URL: `jdbc:h2:mem:testdb`
+
 ## Explore front-end app
 
 - To explore how the REST API `contact-service` is being used in practice, the front-end application can also be started.
