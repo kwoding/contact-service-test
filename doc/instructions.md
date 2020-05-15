@@ -33,7 +33,7 @@ contact-frontend_1  |
 
 **Note:** If you are running Docker Toolbox (Windows) the default IP is `192.168.99.100` (you can check by running `docker-machine ip default`), so navigate in your browser to http://192.168.99.100:3000 instead.
 
-![Login screen](./img/login_screen.png)
+![Login screen](./img/login-screen.png)
 
 5. Run the following command in the root folder of the project (in a different terminal window) to ensure you have everything set up.
 
