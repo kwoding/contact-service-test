@@ -11,7 +11,7 @@
         <junit.version>5.1.0</junit.version>
         <assertj-core.version>3.16.1</assertj-core.version>
         <rest-assured.version>3.3.0</rest-assured.version>
-        <jackson-databind.version>2.11.0</jackson-databind.version>
+        <jackson-databind.version>2.12.6.1</jackson-databind.version>
         <jackson-datatype.version>2.11.0</jackson-datatype.version>
         <commons-configuration.version>1.10</commons-configuration.version>
         <javafaker.version>1.0.2</javafaker.version>
